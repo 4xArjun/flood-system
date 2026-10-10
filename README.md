@@ -25,3 +25,36 @@ When heavy rainfall hits, emergency response teams face two critical bottlenecks
 ---
 
 ## 🏗️ System Architecture
++------------------------+      +--------------------------+
+|   IoT River Sensors    |      |  Demographic & Village   |
+|   & Rain Forecasts     |      |   Vulnerability Data     |
++-----------+------------+      +------------+-------------+
+|                                |
++----------------+---------------+
+|
+v
++-------------------------------+
+|   48h Hydrological Engine     |
+|   (Threshold & Flood Check)   |
++---------------+---------------+
+|
+v
++-------------------------------+
+| Prioritisation & Alert Engine |
+| (Priority Score & Dispatch)   |
++-------------------------------+
+
+
+## 🧮 Logic & Formulation
+
+### 1. 48-Hour River Level Prediction
+$$\text{Predicted Level}_{48\text{h}} = \text{Current Level} + (\text{48h Rain Forecast} \times \text{Runoff Coefficient})$$
+
+If $\text{Predicted Level}_{48\text{h}} \ge \text{Danger Threshold}$, the river is flagged as an active flood hazard.
+
+### 2. Village Relief Prioritisation
+$$\text{Priority Score} = \text{Flood Status (1 or 0)} \times \text{Vulnerability Score} \times \text{Population}$$
+
+Villages are sorted in descending order of their Priority Score so rescue efforts prioritize high-density, highly vulnerable regions.
+
+
